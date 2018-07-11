@@ -38,18 +38,17 @@
  <div class="cont_form_login">
 <a href="#" @click="ocultar_login_sign_up" ><i class="material-icons">&#xE5C4;</i></a>
    <h2>LOGIN</h2>
- <input type="text" placeholder="Email" />
-<input type="password" placeholder="Password" />
+ <input v-model="username" type="text" placeholder="Username" />
+<input v-model="password" type="password" placeholder="Password" />
 <button class="btn_login" @click="login">LOGIN</button>
   </div>
   
    <div class="cont_form_sign_up">
 <a href="#" @click="ocultar_login_sign_up"><i class="material-icons">&#xE5C4;</i></a>
      <h2>SIGN UP</h2>
-<input type="text" placeholder="Email" />
-<input type="text" placeholder="User" />
-<input type="password" placeholder="Password" />
-<input type="password" placeholder="Confirm Password" />
+<input v-model="email" type="text" placeholder="Email" />
+<input v-model="username" type="text" placeholder="User" />
+<input v-model="password" type="password" placeholder="Password" />
 <button class="btn_sign_up" @click="signup">SIGN UP</button>
 
   </div>
@@ -62,9 +61,10 @@
 </template>
 
 <script>
-  /* ------------------------------------ Click on login and Sign Up to  changue and view the effect
----------------------------------------
-*/
+
+import axios from 'axios'
+import swal from 'sweetalert';
+
 export default {
   methods: {
     cambiar_login () {
@@ -106,9 +106,44 @@ export default {
     },
     login () {
       console.log('real login')
+      axios.post('http://localhost:3000/users/login',{
+        username: this.username,
+        password: this.password
+      })
+      .then(({data})=>{
+        console.log(data.found._id)
+        localStorage.setItem('idUser',data.found._id)
+        swal('Kamu berhasil login')
+      })
+      .catch(err=> {
+        console.log(err.message)
+        swal('username / password salah')
+      })
+
     },
     signup () {
       console.log('real signup')
+      // console.log(this.username,this.password,this.email)
+      axios.post('http://localhost:3000/users/register',{
+        username: this.username,
+        password: this.password,
+        email: this.email
+      })
+      .then((data)=> {
+        console.log(data)
+        swal('Kamu berhasil register')
+      })
+      .catch(err=> {
+        console.log(err.message)
+        swal('register gagal')
+      })
+    }
+  },
+  data () {
+    return {
+      username:'',
+      password: '',
+      email: ''
     }
   }
 }

@@ -6,17 +6,18 @@
     id="card-geser"
   >
     <v-flex xs12>
-    <v-expansion-panel popout>
-      <v-expansion-panel-content style="background-image:url(https://www.xmple.com/wallpaper/linear-blue-gradient-1920x1080-c2-00bfff-b0e0e6-a-15-f-14.svg)">
+    <v-expansion-panel popout @click="popOut">
+      <v-expansion-panel-content id="outsidePanel" style="background-color:#EF5350">
         <v-layout slot="header" align-center row spacer>
           <v-flex xs4 sm2 md1>
             <v-avatar>
-            <v-icon :color="messages.color" v-text="messages.icon">
+            <v-icon :color="messages.color">
+              folder
             </v-icon>
             </v-avatar>
           </v-flex>
           <v-flex sm5 md3 hidden-xs-only >
-            <strong v-html="messages.name" ></strong>
+            <strong style="text-decoration-color:yellow" > Todo</strong>
             <span> ({{messages.total}}) </span>
           </v-flex>
           <v-flex no-wrap xs5 sm3 >
@@ -26,15 +27,59 @@
             <strong v-html="messages.title" ></strong>
           </v-flex>
         </v-layout>
-          <v-card style="background-color:white">
-            <v-divider></v-divider>
-            <v-card-text v-text="lorem"></v-card-text>
-          </v-card>
-          <v-card style="background-color:white">
-            <v-divider></v-divider>
-            <v-card-text v-text="lorem"></v-card-text>
-          </v-card>
-          
+
+
+        <!-- star panel card -->
+          <v-container>
+            <v-layout
+              column
+              justify-center 
+              id="card-geser"
+            >
+                <v-flex xs12>
+                  <v-expansion-panel popout>
+                    <v-expansion-panel-content id="insidePanel" style="background-color:#448AFF">
+                      <v-layout slot="header" align-center row spacer>
+                        <v-flex xs4 sm2 md1>
+                         <v-avatar>
+                           <v-badge color="red">
+                            <span slot="badge">  ! </span>
+                              <v-icon :color="messages.color">
+                               assignment
+                              </v-icon>
+                           </v-badge>
+                         </v-avatar>
+                        </v-flex>
+                         <v-flex sm5 md3 hidden-xs-only style="margin-left:10px">
+                            <strong style="background-color:lightcoral">Important</strong>
+                            <span> {{todo.date}} </span>
+                         </v-flex>
+
+                        <v-flex no-wrap xs5 sm3 align-center>
+                          <v-chip class="ml-0" label small :color="`red lighten-2`">
+                            Not Done Yet 
+                          </v-chip>
+                          <strong> Makan pagi di hacktiv8 </strong>
+                        </v-flex>
+                        </v-layout>
+
+                        <v-card style="background-color:white">
+                          <v-divider></v-divider>
+                          <v-card-text v-text="lorem"></v-card-text>
+                        </v-card>
+
+                        <v-card style="background-color:white">
+                          <v-divider></v-divider>
+                          <v-card-text v-text="lorem"></v-card-text>
+                        </v-card>
+                      
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          <!-- end todo panel-->
+
       </v-expansion-panel-content>
     </v-expansion-panel>
     </v-flex>
@@ -45,7 +90,7 @@
       absolute
       middle
       right
-      icon style="margin-right:70px;margin-top:-10px"
+      icon style="margin-right:100px;margin-top:-20px"
       large
       block
     >
@@ -55,23 +100,31 @@
 </template>
 
 <script>
+import moment from 'moment'
   export default {
     data: () => ({
       messages: {
           color: 'success',
           icon: 'assignment',
           name: 'Todo',
-          new: 'unread',
+          new: 'progress',
           total: 3,
-          title: 'Todo-list'
+          title: '3/10'
       },
       lorem: 'Lorem ipsum Lorem Ipsum Lorem Ipsum',
-      popoutexpan: ''
+      popoutexpan: '',
+      todo: {
+        name: 'Makan Pagi',
+        date: moment().format('LT')
+      }
       }),
       methods: {
         testpop () {
           console.log('pop out')
           console.log(this.popoutexpan)
+        },
+        popOut () {
+          console.log('Jalan nih popout')
         }
       }
   }

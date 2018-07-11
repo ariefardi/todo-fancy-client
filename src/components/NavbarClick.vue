@@ -1,11 +1,11 @@
 <template>
-  <v-toolbar id="navbar-geser" color="white" style="margin-right:200px">
+  <v-toolbar id="navbar-geser" style="margin-right:200px;background-color:#26C6DA">
     <v-toolbar-side-icon @click="openNav"></v-toolbar-side-icon>
     <v-toolbar-title>TODO LIST</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
         <label class="switch" id="toggle-geser" style="margin-top:0px">
-        <input type="checkbox" checked>
+        <input type="checkbox" checked @click="checkBox" id="myCheck">
         <span class="slider round"></span>
         </label>
     </v-toolbar-items>
@@ -28,6 +28,24 @@
                  document.getElementById("toggle-geser").style.marginRight = "250px";
                  document.getElementById("clock-geser").style.marginLeft = "250px";
                  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+            },
+            checkBox () {
+              console.log('jalan')
+              let checkKotak = document.getElementById("myCheck")
+              if (checkKotak.checked) {
+                console.log('true')
+                document.getElementById("outsidePanel").style.backgroundColor = "#EF5350"
+                document.getElementById("insidePanel").style.backgroundColor = "#448AFF"
+                document.getElementById("bodyChange").style.backgroundColor = "lightCoral"
+                document.getElementById("navbar-geser").style.backgroundColor = "#EF5350"
+              }
+              else {
+                console.log('false')
+                document.getElementById("outsidePanel").style.backgroundColor = "#448AFF"
+                document.getElementById("insidePanel").style.backgroundColor = "#EF5350"
+                document.getElementById("bodyChange").style.backgroundColor = "#29B6F6"
+                document.getElementById("navbar-geser").style.backgroundColor = "#448AFF"
+              }
             }
         }
     }
