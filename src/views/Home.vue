@@ -20,6 +20,11 @@ export default {
     Navbar, 
     Card,
     Clock
+  },
+  created () {
+    if(!localStorage.hasOwnProperty('token')){
+            this.$router.push('/login')
+        }
   }
 }
 </script>

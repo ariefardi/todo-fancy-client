@@ -112,8 +112,11 @@ export default {
       })
       .then(({data})=>{
         console.log(data.found._id)
+        localStorage.setItem('token',data.token)
+        localStorage.setItem('username',data.found.username)
         localStorage.setItem('idUser',data.found._id)
         swal('Kamu berhasil login')
+        this.$router.push('/')
       })
       .catch(err=> {
         console.log(err.message)
