@@ -1,9 +1,6 @@
 <template>
-<v-container>
-  <v-layout row wrap>
-  <v-flex>
-<div class="clock-container" id="clock-container">
-  
+<v-flex>
+  <v-container class="clock-container" id="clock-container">
   <div class="clock-col">
     <v-flex>
     <p class="clock-day clock-timer">
@@ -41,10 +38,8 @@
     </p>
   </div>
   </v-flex>
-</div>
-</v-flex>
-</v-layout>
 </v-container>
+</v-flex>
 </template>
 
 <script>
@@ -74,7 +69,7 @@ console.log('Jalan gak nih?')
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -30px
+    margin-top: -10px
   }
 
 .clock {

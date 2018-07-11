@@ -2,7 +2,7 @@
   <div class="home">
     <Navbar></Navbar>
     <Clock id="clock-geser"></Clock>
-    <Card style="margin-top: -50px" ></Card>
+    <Card style="margin-top: -10px" ></Card>
   </div>
 </template>
 

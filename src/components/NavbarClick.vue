@@ -44,6 +44,7 @@
 }
 #clock-geser {
   transition: margin-left .5s;
+  margin-top: 30px
 }
 
 .switch {
