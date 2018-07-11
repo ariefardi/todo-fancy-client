@@ -6,7 +6,7 @@
     id="card-geser"
   >
     <v-flex xs12>
-    <v-expansion-panel popout @click="popOut">
+    <v-expansion-panel popout >
       <v-expansion-panel-content id="outsidePanel" style="background-color:#EF5350">
         <v-layout slot="header" align-center row spacer>
           <v-flex xs4 sm2 md1>
@@ -18,19 +18,19 @@
           </v-flex>
           <v-flex sm5 md3 hidden-xs-only >
             <strong style="text-decoration-color:yellow" > Todo</strong>
-            <span> ({{messages.total}}) </span>
+            <span> ({{todos.length}}) </span>
           </v-flex>
           <v-flex no-wrap xs5 sm3 >
             <v-chip class="ml-0" label small :color="`${messages.color} lighten-4`">
-              {{messages.new}} new
+              {{messages.new}}
             </v-chip>
-            <strong v-html="messages.title" ></strong>
+            <strong> 0/{{todos.length}} </strong>
           </v-flex>
         </v-layout>
 
 
         <!-- star panel card -->
-          <v-container>
+          <v-container v-for="(todo, index) in todos" :key="index">
             <v-layout
               column
               justify-center 
@@ -42,7 +42,13 @@
                       <v-layout slot="header" align-center row spacer>
                         <v-flex xs4 sm2 md1>
                          <v-avatar>
-                           <v-badge color="red">
+                           <v-badge color="green" v-if="todo.done">
+                            <span slot="badge"> <v-icon>done</v-icon> </span>
+                              <v-icon :color="messages.color">
+                               assignment
+                              </v-icon>
+                           </v-badge>
+                           <v-badge color="red" v-else>
                             <span slot="badge">  ! </span>
                               <v-icon :color="messages.color">
                                assignment
@@ -51,26 +57,30 @@
                          </v-avatar>
                         </v-flex>
                          <v-flex sm5 md3 hidden-xs-only style="margin-left:10px">
-                            <strong style="background-color:lightcoral">Important</strong>
-                            <span> {{todo.date}} </span>
+                            <strong style="background-color:lightcoral">{{todo.status}}</strong>
+                            <span> {{todo.todoCreated}} </span>
                          </v-flex>
 
                         <v-flex no-wrap xs5 sm3 align-center>
-                          <v-chip class="ml-0" label small :color="`red lighten-2`">
+                          <v-chip class="ml-0" label small :color="`green lighten-2`" v-if="todo.done">
+                            Done 
+                          </v-chip>
+                          <v-chip class="ml-0" label small :color="`red lighten-2`" v-else>
                             Not Done Yet 
                           </v-chip>
-                          <strong> Makan pagi di hacktiv8 </strong>
+                          <strong> {{todo.todo}}</strong>
                         </v-flex>
                         </v-layout>
 
                         <v-card style="background-color:white">
                           <v-divider></v-divider>
-                          <v-card-text v-text="lorem"></v-card-text>
-                        </v-card>
-
-                        <v-card style="background-color:white">
-                          <v-divider></v-divider>
-                          <v-card-text v-text="lorem"></v-card-text>
+                          <v-card-text v-text="todo.description"></v-card-text>
+                          <v-card-text> dont forget your deadline at {{todo.deadline}}</v-card-text>
+                          <v-card-actions>
+                            <v-btn small> update </v-btn>
+                            <v-btn small> delete </v-btn>
+                            <v-btn small> mark as done </v-btn>
+                          </v-card-actions>
                         </v-card>
                       
                     </v-expansion-panel-content>
@@ -101,6 +111,7 @@
 
 <script>
 import moment from 'moment'
+import { mapState, mapActions } from 'vuex';
   export default {
     data: () => ({
       messages: {
@@ -118,15 +129,16 @@ import moment from 'moment'
         date: moment().format('LT')
       }
       }),
-      methods: {
-        testpop () {
-          console.log('pop out')
-          console.log(this.popoutexpan)
-        },
-        popOut () {
-          console.log('Jalan nih popout')
-        }
-      }
+      computed: {
+    ...mapState([
+      'todos'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'getTodos'
+    ])
+  },
   }
 </script>
 <style lang="scss">

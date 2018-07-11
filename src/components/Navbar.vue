@@ -3,6 +3,7 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
   <a href="#">Clean Todo</a>
+  <a href="#" @click="logout">Logout</a>
 </div>
   <NavbarClick></NavbarClick>
 </div>
@@ -22,9 +23,11 @@ import NavbarClick from '@/components/NavbarClick.vue'
                 document.getElementById("card-geser").style.marginLeft = "0";
                  document.getElementById("navbar-geser").style.marginLeft = "0px";
                  document.getElementById("toggle-geser").style.marginRight = "0px";
-                 document.getElementById("clock-geser").style.marginLeft = "0px";
-                 document.getElementById("clock-geser").style.marginRight = "0px";
-                document.body.style.backgroundColor = "aquamarine";
+                //  document.getElementById("clock-geser").style.marginLeft = "0px";
+                //  document.getElementById("clock-geser").style.marginRight = "0px";
+            },
+            logout () {
+                console.log('logout')
             }
         }
     }

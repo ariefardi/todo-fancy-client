@@ -26,8 +26,7 @@
                  document.getElementById("navbar-geser").style.marginLeft = "200px";
                  document.getElementById("card-geser").style.marginLeft = "250px";
                  document.getElementById("toggle-geser").style.marginRight = "250px";
-                 document.getElementById("clock-geser").style.marginLeft = "250px";
-                 document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+                //  document.getElementById("clock-geser").style.marginLeft = "250px";
             },
             checkBox () {
               console.log('jalan')
