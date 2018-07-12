@@ -2,7 +2,7 @@
 <div id="myModal" class="modal" >
     <div class="modal-content" >
         <div class="modal-header">
-            <span class="close">&times;</span>
+            <span class="close"> <v-btn @click="close" icon small flat><v-icon small>close</v-icon></v-btn></span>
             <h2>Modal Header</h2>
         </div>
         <div class="modal-body" >
@@ -17,21 +17,19 @@
 </template>
 
 <script>
-    let modal = document.getElementById("myModal")
-    // let span = document.getElementsByClassName('close')[0]
-    // span.onclick = function() {
-    // modal.style.display = "none";
-    // }
-    window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+import {mapActions, mapState} from 'vuex'
+    export default {
+        methods: {
+            ...mapActions([
+                'close'
+            ])
+        }
     }
 </script>
 
 <style>
 .modal {
-    display: none; /* Hidden by default */
+    /* display: none; Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     padding-top: 100px; /* Location of the box */

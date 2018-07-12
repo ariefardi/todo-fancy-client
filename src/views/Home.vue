@@ -3,6 +3,7 @@
     <Navbar></Navbar>
     <!-- <Clock id="clock-geser"></Clock> -->
     <Card style="margin-top: -10px" ></Card>
+    <Modal v-if="modal===true"></Modal>
   </div>
 </template>
 
@@ -26,7 +27,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'todos'
+      'todos','modal'
     ])
   },
   methods: {

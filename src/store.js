@@ -6,11 +6,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    todos: []
+    todos: [],
+    modal: false
   },
   mutations: {
     setTodos (state,payload) {
       state.todos = payload
+    },
+    setModal (state, payload) {
+      state.modal = payload
     }
   },
   actions: {
@@ -34,10 +38,12 @@ export default new Vuex.Store({
       })
     },
     addTodo (context) {
-      console.log('add Todo')
-      let modal = document.getElementById('myModal')
-      console.log(modal)
-      // modal.style.display = 'block'
+    console.log('add Todo')
+    context.commit('setModal',true)
+   
+    },
+    close (context) {
+      context.commit('setModal',false)
     }
   }
 })
