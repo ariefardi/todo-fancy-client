@@ -26,12 +26,18 @@ export default new Vuex.Store({
         let result = []
         for(var i=0;i<temp.length;i++) {
           if (temp[i].userTodo._id == id) {
-            console.log('id masuk yang cocok',i)
+            // console.log('id masuk yang cocok',i)
             result.push(temp[i])
           }
         }
         context.commit('setTodos',result)
       })
+    },
+    addTodo (context) {
+      console.log('add Todo')
+      let modal = document.getElementById('myModal')
+      console.log(modal)
+      // modal.style.display = 'block'
     }
   }
 })

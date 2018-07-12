@@ -12,6 +12,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import Navbar from '@/components/Navbar.vue'
 import Card from '@/components/Card.vue'
 import Clock from '@/components/Clock.vue'
+import Modal from '@/components/Modal.vue'
 import {mapActions, mapState} from 'vuex'
 
 export default {
@@ -20,7 +21,8 @@ export default {
     HelloWorld,
     Navbar, 
     Card,
-    Clock
+    Clock,
+    Modal
   },
   computed: {
     ...mapState([

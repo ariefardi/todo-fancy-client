@@ -103,6 +103,7 @@
       icon style="margin-right:100px;margin-top:-20px"
       large
       block
+      @click="addTodo"
     >
       <v-icon>add</v-icon>
     </v-btn>
@@ -110,6 +111,7 @@
 </template>
 
 <script>
+
 import moment from 'moment'
 import { mapState, mapActions } from 'vuex';
   export default {
@@ -136,7 +138,7 @@ import { mapState, mapActions } from 'vuex';
   },
   methods: {
     ...mapActions([
-      'getTodos'
+      'getTodos','addTodo'
     ])
   },
   }

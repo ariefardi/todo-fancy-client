@@ -74,12 +74,6 @@ export default {
   components: {
   },
   methods: {
-    getUserData () {
-
-    },
-    onLogout () {
-
-    },
     cambiar_login () {
       console.log('cambair login')
       document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_login";  
