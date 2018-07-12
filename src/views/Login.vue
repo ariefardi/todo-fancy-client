@@ -42,8 +42,11 @@
 <input v-model="password" type="password" placeholder="Password" />
 <button class="btn_login" @click="login">LOGIN</button>
   </div>
-  
-   <div class="cont_form_sign_up">
+  <!-- <facebook-login class="button" appId="262590884500976" @login="getUserData" @logout="onLogout" ></facebook-login> -->
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+    <div class="cont_form_sign_up">
+      <!-- facebook login -->
 <a href="#" @click="ocultar_login_sign_up"><i class="material-icons">&#xE5C4;</i></a>
      <h2>SIGN UP</h2>
 <input v-model="email" type="text" placeholder="Email" />
@@ -64,9 +67,19 @@
 
 import axios from 'axios'
 import swal from 'sweetalert';
+import facebookLogin from 'facebook-login-vuejs'
+import {ui, uiConfig} from '@/firebase/firebaseui.js'
 
 export default {
+  components: {
+  },
   methods: {
+    getUserData () {
+
+    },
+    onLogout () {
+
+    },
     cambiar_login () {
       console.log('cambair login')
       document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_login";  
@@ -148,6 +161,9 @@ export default {
       password: '',
       email: ''
     }
+  },
+  created () {
+    ui.start('#firebaseui-auth-container', uiConfig)
   }
 }
 

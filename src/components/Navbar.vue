@@ -10,6 +10,7 @@
 </template>
 <script>
 import NavbarClick from '@/components/NavbarClick.vue'
+import swal from 'sweetalert';
     export default {
         components: {
             NavbarClick
@@ -28,6 +29,9 @@ import NavbarClick from '@/components/NavbarClick.vue'
             },
             logout () {
                 console.log('logout')
+                localStorage.clear();
+                swal('Kamu berhasil logout')
+                this.$router.push('/login')
             }
         }
     }
