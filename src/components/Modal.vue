@@ -3,11 +3,20 @@
     <div class="modal-content" >
         <div class="modal-header">
             <span class="close"> <v-btn @click="close" icon small flat><v-icon small>close</v-icon></v-btn></span>
-            <h2>Modal Header</h2>
+            <h2>Add Your Todo</h2>
         </div>
-        <div class="modal-body" >
-            <p>some text</p>
-            <p>some text</p>
+        <div class="modal-body">
+            <label for="Todo"> Your Todo </label>
+            <input type="text" placeholder="todo">
+            <label for="Description"> Description </label>
+            <input type="text" placeholder="description">
+
+            <label for="country">status</label>
+            
+            <select id="country" name="country" style="align:cente">
+            <option >important</option>
+            </select>
+            
         </div>
         <div class="modal-footer" >
             <h3>Modal Footer</h3>
@@ -19,6 +28,11 @@
 <script>
 import {mapActions, mapState} from 'vuex'
     export default {
+        data () {
+            return {
+                important: 'important'
+            }
+        },
         methods: {
             ...mapActions([
                 'close'
@@ -28,6 +42,18 @@ import {mapActions, mapState} from 'vuex'
 </script>
 
 <style>
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #555;
+    outline: black;
+}
+
+input[type=text]:focus {
+    background-color: lightblue;
+}
 .modal {
     /* display: none; Hidden by default */
     position: fixed; /* Stay in place */
