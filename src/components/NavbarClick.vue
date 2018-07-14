@@ -33,15 +33,27 @@
               let checkKotak = document.getElementById("myCheck")
               if (checkKotak.checked) {
                 console.log('true')
-                document.getElementById("outsidePanel").style.backgroundColor = "#EF5350"
-                document.getElementById("insidePanel").style.backgroundColor = "#448AFF"
+                
+                var x = document.getElementById("panelInside").getElementsByClassName("insidePanel");
+                console.log(x[1])
+
+                for(var i=0;i<x.length;i++){
+                  x[i].style.backgroundColor = "#448AFF"
+                }
+                document.getElementsByClassName("outsidePanel")[0].style.backgroundColor = "#EF5350"
+                // document.getElementsByClassName("insidePanel")[0].style.backgroundColor = "#448AFF"
                 document.getElementById("bodyChange").style.backgroundColor = "lightCoral"
                 document.getElementById("navbar-geser").style.backgroundColor = "#EF5350"
               }
               else {
                 console.log('false')
-                document.getElementById("outsidePanel").style.backgroundColor = "#448AFF"
-                document.getElementById("insidePanel").style.backgroundColor = "#EF5350"
+                var x = document.getElementById("panelInside").getElementsByClassName("insidePanel");
+                console.log(x.length)
+                for(var i=0;i<x.length;i++){
+                  x[i].style.backgroundColor = "#EF5350"
+                }
+                document.getElementsByClassName("outsidePanel")[0].style.backgroundColor = "#448AFF"
+                // document.getElementsByClassName("insidePanel")[0].style.backgroundColor = "#EF5350"
                 document.getElementById("bodyChange").style.backgroundColor = "#29B6F6"
                 document.getElementById("navbar-geser").style.backgroundColor = "#448AFF"
               }

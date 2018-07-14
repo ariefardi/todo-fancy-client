@@ -7,19 +7,26 @@
         </div>
         <div class="modal-body">
             <label for="Todo"> Your Todo </label>
-            <input type="text" placeholder="todo">
+            <input type="text" placeholder="todo" v-model="inputTodo">
             <label for="Description"> Description </label>
-            <input type="text" placeholder="description">
+            <input type="text" placeholder="description" v-model="inputDesc">
 
-            <label for="country">status</label>
-            
-            <select id="country" name="country" style="align:cente">
-            <option >important</option>
+            <label for="inputStatus">status</label>
+            <select id="inputStatus" name="inputStatus"  style="align:center;" v-model="inputStatus">
+            <option value="" disabled selected>Select your option</option>
+            <option  v-for="(status, index) in statusTodo" :key="index" > {{status}} </option>
             </select>
+
+            <label for="inputDeadline">deadline</label>
+            <select id="inputDeadline" name="inputDeadline"  style="align:center;" v-model="inputDeadline">
+            <option value="" disabled selected>Your deadline (7 days)</option>
+            <option  v-for="(deadline, index) in deadlines" :key="index" > {{deadline}} </option>
+            </select>
+
             
         </div>
         <div class="modal-footer" >
-            <h3>Modal Footer</h3>
+            <v-btn @click="addTodo">add</v-btn>
         </div>
     </div>
 </div>
@@ -30,18 +37,65 @@ import {mapActions, mapState} from 'vuex'
     export default {
         data () {
             return {
-                important: 'important'
+                statusTodo : ['important', 'medium', 'low'],
+                deadlines : [1,2,3,4,5,6,7]
             }
+        },
+        computed: {
+            ...mapState([
+
+            ]),
+            inputDeadline: {
+                get () {
+                    return this.$store.state.deadline
+                },
+                set (value) {
+                    this.$store.commit('setDeadline', value)
+                }
+            },
+            inputStatus: {
+                get () {
+                    return this.$store.state.status
+                },
+                set (value) {
+                    this.$store.commit('setStatus', value)
+                }
+            },
+            inputDesc: {
+                get () {
+                    return this.$store.state.description
+                },
+                set (value) {
+                    this.$store.commit('setDesc', value)
+                }
+            },
+            inputTodo: {
+                get () {
+                    return this.$store.state.todo
+                },
+                set (value) {
+                    this.$store.commit('setTodo', value)
+                }
+            },
         },
         methods: {
             ...mapActions([
-                'close'
-            ])
+                'close', 'addTodo'
+            ]),
+            add () {
+                console.log('masuk',this.status)
+            }
+        },
+        created () {
+            this.$store.dispatch('getTodos')
         }
     }
 </script>
 
-<style>
+<style scoped>
+#status {
+    border: 1px solid black;
+}
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;

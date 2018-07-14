@@ -7,7 +7,7 @@
   >
     <v-flex xs12>
     <v-expansion-panel popout >
-      <v-expansion-panel-content id="outsidePanel" style="background-color:#EF5350">
+      <v-expansion-panel-content class="outsidePanel" style="background-color:#EF5350">
         <v-layout slot="header" align-center row spacer>
           <v-flex xs4 sm2 md1>
             <v-avatar>
@@ -30,6 +30,7 @@
 
 
         <!-- star panel card -->
+        <div id="panelInside" >
           <v-container v-for="(todo, index) in todos" :key="index">
             <v-layout
               column
@@ -38,7 +39,7 @@
             >
                 <v-flex xs12>
                   <v-expansion-panel popout>
-                    <v-expansion-panel-content id="insidePanel" style="background-color:#448AFF">
+                    <v-expansion-panel-content class="insidePanel" style="background-color:#448AFF">
                       <v-layout slot="header" align-center row spacer>
                         <v-flex xs4 sm2 md1>
                          <v-avatar>
@@ -78,7 +79,7 @@
                           <v-card-text> dont forget your deadline at {{todo.deadline}}</v-card-text>
                           <v-card-actions>
                             <v-btn small> update </v-btn>
-                            <v-btn small> delete </v-btn>
+                            <v-btn @click="deleteTodo(index)" small> delete </v-btn>
                             <v-btn small> mark as done </v-btn>
                           </v-card-actions>
                         </v-card>
@@ -88,6 +89,7 @@
                 </v-flex>
               </v-layout>
             </v-container>
+          </div>
           <!-- end todo panel-->
 
       </v-expansion-panel-content>
@@ -103,7 +105,7 @@
       icon style="margin-right:100px;margin-top:-20px"
       large
       block
-      @click="addTodo"
+      @click="openModal"
     >
       <v-icon>add</v-icon>
     </v-btn>
@@ -138,10 +140,13 @@ import { mapState, mapActions } from 'vuex';
   },
   methods: {
     ...mapActions([
-      'getTodos','addTodo'
+      'getTodos','openModal','deleteTodo'
     ])
   },
+  created () {
+    this.$store.dispatch('getTodos')
   }
+}
 </script>
 <style lang="scss">
 #card-geser {
