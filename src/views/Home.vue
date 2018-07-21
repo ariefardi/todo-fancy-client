@@ -40,6 +40,7 @@ export default {
             this.$router.push('/login')
     }
     this.$store.dispatch('getTodos')
+    this.$store.dispatch('getDoneTodo')
 
   }
 }

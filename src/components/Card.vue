@@ -11,7 +11,7 @@
         <v-layout slot="header" align-center row spacer>
           <v-flex xs4 sm2 md1>
             <v-avatar>
-            <v-icon :color="messages.color">
+            <v-icon>
               folder
             </v-icon>
             </v-avatar>
@@ -21,10 +21,10 @@
             <span> ({{todos.length}}) </span>
           </v-flex>
           <v-flex no-wrap xs5 sm3 >
-            <v-chip class="ml-0" label small :color="`${messages.color} lighten-4`">
-              {{messages.new}}
+            <v-chip class="ml-0" label small color="red lighten-4`">
+              Todo
             </v-chip>
-            <strong> 0/{{todos.length}} </strong>
+            <strong> {{doneTodo}}/{{todos.length}} </strong>
           </v-flex>
         </v-layout>
 
@@ -64,12 +64,13 @@
 
                         <v-flex no-wrap xs5 sm3 align-center>
                           <v-chip class="ml-0" label small :color="`green lighten-2`" v-if="todo.done">
-                            Done 
+                            {{todo.todo}}
                           </v-chip>
                           <v-chip class="ml-0" label small :color="`red lighten-2`" v-else>
-                            Not Done Yet 
+                            {{todo.todo}} 
                           </v-chip>
-                          <strong> {{todo.todo}}</strong>
+                          <strong v-if="todo.done"> Done </strong>
+                          <strong v-else> Not Done Yet </strong>
                         </v-flex>
                         </v-layout>
 
@@ -80,7 +81,7 @@
                           <v-card-actions>
                             <v-btn small> update </v-btn>
                             <v-btn @click="deleteTodo(index)" small> delete </v-btn>
-                            <v-btn small> mark as done </v-btn>
+                            <v-btn @click="addDone(index)" small> mark as done </v-btn>
                           </v-card-actions>
                         </v-card>
                       
@@ -102,7 +103,7 @@
       absolute
       middle
       right
-      icon style="margin-right:100px;margin-top:-20px"
+      icon style="margin-right:60px;margin-top:-20px"
       large
       block
       @click="openModal"
@@ -121,10 +122,6 @@ import { mapState, mapActions } from 'vuex';
       messages: {
           color: 'success',
           icon: 'assignment',
-          name: 'Todo',
-          new: 'progress',
-          total: 3,
-          title: '3/10'
       },
       lorem: 'Lorem ipsum Lorem Ipsum Lorem Ipsum',
       popoutexpan: '',
@@ -135,16 +132,15 @@ import { mapState, mapActions } from 'vuex';
       }),
       computed: {
     ...mapState([
-      'todos'
+      'todos','doneTodo'
     ])
   },
   methods: {
     ...mapActions([
-      'getTodos','openModal','deleteTodo'
+      'getTodos','openModal','deleteTodo','addDone'
     ])
   },
   created () {
-    this.$store.dispatch('getTodos')
   }
 }
 </script>
