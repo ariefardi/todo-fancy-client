@@ -8,7 +8,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     todos: [],
+    weather: [],
+    today: '',
     modal: false,
+    weatherModal: false,
     status: '',
     deadline: '',
     todo: '',
@@ -19,8 +22,15 @@ export default new Vuex.Store({
     setTodos (state,payload) {
       state.todos = payload
     },
+    setWeather (state, payload) {
+      state.weather = payload
+      state.today = payload[0]
+    },
     setModal (state, payload) {
       state.modal = payload
+    },
+    setWeatherModal (state, payload) {
+      state.weatherModal = payload
     },
     setDeadline (state, payload) {
       state.deadline = payload
@@ -82,6 +92,10 @@ export default new Vuex.Store({
     context.commit('setModal',true)
    
     },
+    openWeatherModal (context) {
+      console.log('openWeather')
+      context.commit('setWeatherModal',true)
+    },
     close (context) {
       context.commit('setModal',false)
     },
@@ -117,15 +131,29 @@ export default new Vuex.Store({
     addDone (context, index) {
       let query = this.state.todos[index]._id
       console.log(query, 'id')
-      let obj = {
-        done : true
-      }
-      axios.put('http://localhost:3000/todos/updatedone/'+query)
+      axios.put('http://localhost:3000/todos/updatedone/'+query,{done: true})
       .then(todo=> {
         console.log(todo)
       })
       context.commit('addDone',index)
       swal('done')
+    },
+    getWeather (context) {
+      console.log('get weather')
+      axios.get('http://api.openweathermap.org/data/2.5/forecast?id=1642911&units=metric&APPID=ba2d23c5ee58440fbaa71f51e48d27fe')
+      .then(({data})=> {
+        // console.log(data.list)
+        let weather = []
+        for(var i=0;i<data.list.length;i++){
+          // console.log(data.list[i].dt_txt[11]+data.list[i].dt_txt[12])
+          let temp = data.list[i].dt_txt[11]+data.list[i].dt_txt[12]
+          if (temp=='09') {
+            weather.push(data.list[i])
+          }
+        }
+        context.commit('setWeather', weather)
+        console.log(weather)
+      })
     }
   }
 })

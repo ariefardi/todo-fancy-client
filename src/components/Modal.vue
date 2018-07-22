@@ -37,8 +37,8 @@ import {mapActions, mapState} from 'vuex'
     export default {
         data () {
             return {
-                statusTodo : ['important', 'medium', 'low'],
-                deadlines : [1,2,3,4,5,6,7]
+                statusTodo : ['important', 'medium'],
+                deadlines : [1,2,3,4,5]
             }
         },
         computed: {

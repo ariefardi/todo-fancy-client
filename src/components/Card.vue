@@ -57,8 +57,12 @@
                            </v-badge>
                          </v-avatar>
                         </v-flex>
-                         <v-flex sm5 md3 hidden-xs-only style="margin-left:10px">
-                            <strong style="background-color:lightcoral">{{todo.status}}</strong>
+                         <v-flex v-if="todo.status=='important'" sm5 md3 hidden-xs-only style="margin-left:10px">
+                            <strong  style="background-color:lightcoral">{{todo.status}}</strong>
+                            <span> {{todo.todoCreated}} </span>
+                         </v-flex>
+                          <v-flex v-else sm5 md3 hidden-xs-only style="margin-left:10px">
+                            <strong  style="background-color:#FFEE58">{{todo.status}}</strong>
                             <span> {{todo.todoCreated}} </span>
                          </v-flex>
 
@@ -79,9 +83,11 @@
                           <v-card-text v-text="todo.description"></v-card-text>
                           <v-card-text> dont forget your deadline at {{todo.deadline}}</v-card-text>
                           <v-card-actions>
+                            <v-flex>
                             <v-btn small> update </v-btn>
                             <v-btn @click="deleteTodo(index)" small> delete </v-btn>
                             <v-btn @click="addDone(index)" small> mark as done </v-btn>
+                            </v-flex>
                           </v-card-actions>
                         </v-card>
                       
@@ -103,7 +109,7 @@
       absolute
       middle
       right
-      icon style="margin-right:60px;margin-top:-20px"
+      icon style="margin-right:5%;margin-top:-1.5%"
       large
       block
       @click="openModal"

@@ -2,7 +2,7 @@
 <div>
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
-  <a href="#">Clean Todo</a>
+  <a href="#" @click="openWeatherModal" >Check Weather</a>
   <a href="#" @click="logout">Logout</a>
 </div>
   <NavbarClick></NavbarClick>
@@ -11,11 +11,15 @@
 <script>
 import NavbarClick from '@/components/NavbarClick.vue'
 import swal from 'sweetalert';
+import {mapActions} from 'vuex'
     export default {
         components: {
             NavbarClick
         },
         methods: {
+            ...mapActions([
+                'openWeatherModal'
+            ]),
             testBtn () {
                 console.log('testbtn')
             },

@@ -4,6 +4,7 @@
     <!-- <Clock id="clock-geser"></Clock> -->
     <Card style="margin-top: -10px" ></Card>
     <Modal v-if="modal===true"></Modal>
+    <WeatherModal></WeatherModal>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import Navbar from '@/components/Navbar.vue'
 import Card from '@/components/Card.vue'
 import Clock from '@/components/Clock.vue'
 import Modal from '@/components/Modal.vue'
+import WeatherModal from '@/components/WeatherModal.vue'
 import {mapActions, mapState} from 'vuex'
 
 export default {
@@ -23,11 +25,12 @@ export default {
     Navbar, 
     Card,
     Clock,
-    Modal
+    Modal,
+    WeatherModal
   },
   computed: {
     ...mapState([
-      'todos','modal'
+      'todos','modal','weatherModal'
     ])
   },
   methods: {
@@ -41,6 +44,7 @@ export default {
     }
     this.$store.dispatch('getTodos')
     this.$store.dispatch('getDoneTodo')
+    this.$store.dispatch('getWeather')
 
   }
 }
