@@ -42,24 +42,23 @@
 <input v-model="password" type="password" placeholder="Password" />
 <button class="btn_login" @click="login">LOGIN</button>
   </div>
-  <!-- <facebook-login class="button" appId="262590884500976" @login="getUserData" @logout="onLogout" ></facebook-login> -->
-    <div id="firebaseui-auth-container"></div>
-    <div id="loader">Loading...</div>
     <div class="cont_form_sign_up">
-      <!-- facebook login -->
-<a href="#" @click="ocultar_login_sign_up"><i class="material-icons">&#xE5C4;</i></a>
-     <h2>SIGN UP</h2>
-<input v-model="email" type="text" placeholder="Email" />
-<input v-model="username" type="text" placeholder="User" />
-<input v-model="password" type="password" placeholder="Password" />
-<button class="btn_sign_up" @click="signup">SIGN UP</button>
-
+      <a href="#" @click="ocultar_login_sign_up"><i class="material-icons">&#xE5C4;</i></a>
+          <h2>SIGN UP</h2>
+      <input v-model="email" type="text" placeholder="Email" />
+      <input v-model="username" type="text" placeholder="User" />
+      <input v-model="password" type="password" placeholder="Password" />
+      <button class="btn_sign_up" @click="signup">SIGN UP</button>
   </div>
 
     </div>
-    
+    <v-btn to="/" @click="fbLogin" class="loginBtn loginBtn--facebook">
+      Login with Facebook
+    </v-btn>
   </div>
+  
  </div>
+ 
 </div>
 </template>
 
@@ -67,13 +66,53 @@
 
 import axios from 'axios'
 import swal from 'sweetalert';
-import facebookLogin from 'facebook-login-vuejs'
-import {ui, uiConfig} from '@/firebase/firebaseui.js'
+import {fbLogin, provider} from '@/firebase/firebase.js'
 
 export default {
   components: {
   },
   methods: {
+    fbLogin () {
+      let self = this
+      console.log('fbligon')
+      fbLogin.signInWithPopup(provider)
+      .then(function(result) {
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      // console.log(result.user.displayName,'ini result display Name')
+      // console.log(result.user.email, ' ini email')
+      // console.log(result.user.uid, ' ini id')
+      // var token = result.credential.accessToken;
+      // The signed-in user info.
+      // ...
+
+        const user = result.user
+        axios.post('http://localhost:3000/users/fb/login',{
+          username: user.displayName,
+          email: user.email,
+          password: user.uid
+        })
+        .then(({data})=> {
+          console.log(data.found._id)
+          localStorage.setItem('token',data.token)
+          localStorage.setItem('username',data.found.username)
+          localStorage.setItem('idUser',data.found._id)
+          swal('Kamu berhasil login')
+          self.$router.push('/')
+        })
+      })
+      .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      console.log(errorCode, errorMessage, email, credential)
+      swal(error.message)
+      // ...
+    });
+    },
     cambiar_login () {
       console.log('cambair login')
       document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_login";  
@@ -155,9 +194,6 @@ export default {
       password: '',
       email: ''
     }
-  },
-  created () {
-    ui.start('#firebaseui-auth-container', uiConfig)
   }
 }
 
@@ -175,7 +211,53 @@ export default {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
 }
+.loginBtn {
+  box-sizing: border-box;
+  position: relative;
+  /* width: 13em;  - apply for fixed size */
+  margin: 0.2em;
+  padding: 0 15px 0 46px;
+  border: none;
+  text-align: left;
+  line-height: 34px;
+  white-space: nowrap;
+  border-radius: 0.2em;
+  font-size: 16px;
+  color: #FFF;
+}
+.loginBtn:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 100%;
+}
+.loginBtn:focus {
+  outline: none;
+}
+.loginBtn:active {
+  box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+}
 
+
+/* Facebook */
+.loginBtn--facebook {
+  background-color: #4C69BA;
+  background-image: linear-gradient(#4C69BA, #3B55A0);
+  /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+  text-shadow: 0 -1px 0 #354C8C;
+}
+.loginBtn--facebook:before {
+  border-right: #364e92 1px solid;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
+}
+.loginBtn--facebook:hover,
+.loginBtn--facebook:focus {
+  background-color: #5B7BD5;
+  background-image: linear-gradient(#5B7BD5, #4864B1);
+}
 .cotn_principal {
   position: absolute;
   width: 100%;

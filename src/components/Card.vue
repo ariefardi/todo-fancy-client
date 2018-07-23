@@ -7,7 +7,7 @@
   >
     <v-flex xs12>
     <v-expansion-panel popout >
-      <v-expansion-panel-content class="outsidePanel" style="background-color:#EF5350">
+      <v-expansion-panel-content class="outsidePanel" style="background-color:#EFFC5350">
         <v-layout slot="header" align-center row spacer>
           <v-flex xs4 sm2 md1>
             <v-avatar>
@@ -39,7 +39,7 @@
             >
                 <v-flex xs12>
                   <v-expansion-panel popout>
-                    <v-expansion-panel-content class="insidePanel" style="background-color:#448AFF">
+                    <v-expansion-panel-content class="insidePanel" style="background-color:#F7B733">
                       <v-layout slot="header" align-center row spacer>
                         <v-flex xs4 sm2 md1>
                          <v-avatar>

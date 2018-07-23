@@ -10,11 +10,10 @@
     messagingSenderId: "477792319373"
   };
   firebase.initializeApp(config);
-  var provider = new firebase.auth.FacebookAuthProvider();
-  const user = firebase.auth()
+  const provider = new firebase.auth.FacebookAuthProvider();
+  const fbLogin = firebase.auth()
 
   
 //   export {user, provider}
-  export default firebase 
-
+  export {fbLogin, provider}
  

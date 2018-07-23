@@ -1,5 +1,5 @@
 <template>
-<v-dialog v-model="weatherModal" width="100%">
+<v-dialog v-model="weatherModal" width="80%">
   <v-container style="max-width:100%;padding:0px">
     <v-layout>
       <v-flex>
@@ -8,7 +8,7 @@
         </v-card>
         <v-card color="white">
           <v-container>
-            <v-layout justify-center>
+            <v-layout>
               <v-flex xs12 sm5 md5>
                 <v-container style="padding:0; margin-top:20px">
                   <v-layout>
@@ -16,18 +16,24 @@
                       <img style="" src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/50n.png">
                     </v-flex>
                      <v-flex xs12 sm6 md6 >
-                      <v-card-text> <h1 style="font-size:48px;padding:20px">{{today.main.temp | formatSuhu}} ºC </h1> </v-card-text>
+                      <v-card-text v-if="today.main === undefined"> <h1 style="font-size:48px;padding:20px">loading....</h1> </v-card-text>
+                      <v-card-text v-else> <h1 style="font-size:48px;padding:20px">{{today.main.temp | formatSuhu}} ºC </h1> </v-card-text>
                     </v-flex>
                   </v-layout>
                 </v-container>
-                <v-card-text style="padding:0">
-                  <h1> {{today.weather[0].main}} </h1>
-                </v-card-text>
-                <v-card-text style="padding:0">
-                  wind: {{today.wind.speed}} m/s
-                </v-card-text>
+                <div v-if="today.weather==undefined">
+                  <h1>loading....</h1>
+                </div>
+                <div v-else>
+                  <v-card-text style="padding:0">
+                    <h1> {{today.weather[0].main}} </h1>
+                  </v-card-text>
+                  <v-card-text style="padding:0">
+                    wind: {{today.wind.speed}} m/s
+                  </v-card-text>
+                </div>
               </v-flex>
-              <v-flex xs12 sm1 md1 v-for="(cuaca, index) in weather" :key="index">
+              <v-flex style="padding:0" xs12 sm1 md1 v-for="(cuaca, index) in weather" :key="index">
                 <v-card>
                   <v-card-text>
                    <strong> {{cuaca.dt_txt | formatDate}} </strong>
@@ -54,8 +60,6 @@
 import moment from 'moment'
 import {mapState} from 'vuex'
 export default {
-  created () {
-  },
   computed: {
     ...mapState([
       'weather','today'
@@ -67,11 +71,6 @@ export default {
       set () {
         this.$store.commit('setWeatherModal', false)
       }
-    }
-  },
-  data () {
-    return {
-      getWeather : this.weather
     }
   },
   filters: {

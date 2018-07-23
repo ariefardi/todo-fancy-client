@@ -1,10 +1,10 @@
 <template>
-  <v-toolbar id="navbar-geser" style="margin-right:200px;background-color:#26C6DA">
+  <v-toolbar id="navbar-geser" style="margin-right:200px;background-color:#EF5350">
     <v-toolbar-side-icon @click="openNav"></v-toolbar-side-icon>
-    <v-toolbar-title>TODO LIST</v-toolbar-title>
+    <v-toolbar-title> <h2>  TODO LIST </h2></v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-        <label class="switch" id="toggle-geser" style="margin-top:0px">
+        <label class="switch" id="toggle-geser" style="margin-top:15%">
         <input type="checkbox" checked @click="checkBox" id="myCheck">
         <span class="slider round"></span>
         </label>
@@ -26,6 +26,7 @@
                  document.getElementById("navbar-geser").style.marginLeft = "200px";
                  document.getElementById("card-geser").style.marginLeft = "250px";
                  document.getElementById("toggle-geser").style.marginRight = "250px";
+                 document.getElementById("toggle-geser").style.marginTop = "10px";
                 //  document.getElementById("clock-geser").style.marginLeft = "250px";
             },
             checkBox () {
@@ -38,11 +39,11 @@
                 console.log(x[1])
 
                 for(var i=0;i<x.length;i++){
-                  x[i].style.backgroundColor = "#448AFF"
+                  x[i].style.backgroundColor = "#F7B733"
                 }
-                document.getElementsByClassName("outsidePanel")[0].style.backgroundColor = "#EF5350"
+                document.getElementsByClassName("outsidePanel")[0].style.backgroundColor = "#EFFC5350"
                 // document.getElementsByClassName("insidePanel")[0].style.backgroundColor = "#448AFF"
-                document.getElementById("bodyChange").style.backgroundColor = "lightCoral"
+                document.getElementById("bodyChange").style.backgroundColor = "#4ABDAC"
                 document.getElementById("navbar-geser").style.backgroundColor = "#EF5350"
               }
               else {
@@ -50,12 +51,12 @@
                 var x = document.getElementById("panelInside").getElementsByClassName("insidePanel");
                 console.log(x.length)
                 for(var i=0;i<x.length;i++){
-                  x[i].style.backgroundColor = "#EF5350"
+                  x[i].style.backgroundColor = "#3b5998"
                 }
-                document.getElementsByClassName("outsidePanel")[0].style.backgroundColor = "#448AFF"
+                document.getElementsByClassName("outsidePanel")[0].style.backgroundColor = "#8b9dc3"
                 // document.getElementsByClassName("insidePanel")[0].style.backgroundColor = "#EF5350"
-                document.getElementById("bodyChange").style.backgroundColor = "#29B6F6"
-                document.getElementById("navbar-geser").style.backgroundColor = "#448AFF"
+                document.getElementById("bodyChange").style.backgroundColor = "#dfe3ee"
+                document.getElementById("navbar-geser").style.backgroundColor = "#3b5998"
               }
             }
         }
@@ -63,6 +64,9 @@
 </script>
 
 <style lang="scss">
+h2 {
+  text-decoration-color: whitesmoke
+}
 #toggle-geser {
     transition: margin-right .5s;
     margin-left: 0px
