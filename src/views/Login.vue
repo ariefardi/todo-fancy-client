@@ -86,7 +86,7 @@ export default {
       // ...
 
         const user = result.user
-        axios.post('http://localhost:3000/users/fb/login',{
+        axios.post('https://api-todo.ariefardi.xyz/users/fb/login',{
           username: user.displayName,
           email: user.email,
           password: user.uid
@@ -152,7 +152,7 @@ export default {
     },
     login () {
       console.log('real login')
-      axios.post('http://localhost:3000/users/login',{
+      axios.post('https://api-todo.ariefardi.xyz/users/login',{
         username: this.username,
         password: this.password
       })
@@ -173,7 +173,7 @@ export default {
     signup () {
       console.log('real signup')
       // console.log(this.username,this.password,this.email)
-      axios.post('http://localhost:3000/users/register',{
+      axios.post('https://api-todo.ariefardi.xyz/users/register',{
         username: this.username,
         password: this.password,
         email: this.email

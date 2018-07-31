@@ -67,7 +67,7 @@ export default new Vuex.Store({
   actions: {
     getTodos (context) {
       console.log('axios get todo')
-      axios.get('http://localhost:3000/todos')
+      axios.get('https://api-todo.ariefardi.xyz/todos')
       .then(({data})=>{
         let temp = data.todos
         let id = localStorage.getItem('idUser')
@@ -110,7 +110,7 @@ export default new Vuex.Store({
         done : false,
         todoCreated : moment().format('LL'),
       }
-      axios.post("http://localhost:3000/todos",obj)
+      axios.post("https://api-todo.ariefardi.xyz/todos",obj)
       .then(({data})=> {
         console.log(data)
         swal('Berhasil menambahkan todo')
@@ -129,13 +129,13 @@ export default new Vuex.Store({
       console.log('dleteTodo', index)
       let query = this.state.todos[index]._id
       console.log(query)
-      axios.delete('http://localhost:3000/todos/delete/'+query)
+      axios.delete('https://api-todo.ariefardi.xyz/todos/delete/'+query)
       context.commit('deleteTodo', index)
     },
     addDone (context, index) {
       let query = this.state.todos[index]._id
       console.log(query, 'id')
-      axios.put('http://localhost:3000/todos/updatedone/'+query,{done: true})
+      axios.put('https://api-todo.ariefardi.xyz/todos/updatedone/'+query,{done: true})
       .then(todo=> {
         console.log(todo)
       })
@@ -144,7 +144,7 @@ export default new Vuex.Store({
     },
     getWeather (context) {
       console.log('get weather')
-      axios.get('http://localhost:3000/weather')
+      axios.get('https://api-todo.ariefardi.xyz/weather')
       .then(({data})=> {
         // console.log(data.list)
         let weather = data.weather
