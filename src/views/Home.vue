@@ -42,7 +42,6 @@ export default {
     if(!localStorage.hasOwnProperty('token')){
             this.$router.push('/login')
     }
-    this.$store.dispatch('getTodos')
     this.$store.dispatch('getWeather')
 
   }

@@ -109,7 +109,11 @@ export default new Vuex.Store({
         console.log(data)
         swal('Berhasil menambahkan todo')
         this.state.modal = false
-        context.commit('pushNewFood', data)
+        this.state.todo = ''
+        this.state.deadline = ''
+        this.state.status = ''
+        this.state.description = ''
+        context.commit('pushNewFood', data.todo)
       })
       .catch(err=> {
         swal(err.message)
@@ -134,17 +138,17 @@ export default new Vuex.Store({
     },
     getWeather (context) {
       console.log('get weather')
-      axios.get('http://api.openweathermap.org/data/2.5/forecast?id=1642911&units=metric&APPID=ba2d23c5ee58440fbaa71f51e48d27fe')
+      axios.get('http://localhost:3000/weather')
       .then(({data})=> {
         // console.log(data.list)
-        let weather = []
-        for(var i=0;i<data.list.length;i++){
-          // console.log(data.list[i].dt_txt[11]+data.list[i].dt_txt[12])
-          let temp = data.list[i].dt_txt[11]+data.list[i].dt_txt[12]
-          if (temp=='09') {
-            weather.push(data.list[i])
-          }
-        }
+        let weather = data.weather
+        // for(var i=0;i<data.list.length;i++){
+        //   // console.log(data.list[i].dt_txt[11]+data.list[i].dt_txt[12])
+        //   let temp = data.list[i].dt_txt[11]+data.list[i].dt_txt[12]
+        //   if (temp=='09') {
+        //     weather.push(data.list[i])
+        //   }
+        // }
         context.commit('setWeather', weather)
         // console.log(weather)
       })

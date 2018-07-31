@@ -150,6 +150,9 @@ export default {
     ])
   },
   created () {
+  },
+  mounted () {
+    this.$store.dispatch('getTodos')
   }
 }
 </script>
