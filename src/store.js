@@ -71,22 +71,15 @@ export default new Vuex.Store({
             result.push(temp[i])
           }
         }
-        context.commit('setTodos',result)
-      })
-    },
-    getDoneTodo (context) {
-      // console.log('getDone')
-      let todos = this.state.todos
-      console.log(this.state.todos, ' ini kebaca gak')
-      console.log('test')
-      let done = 0
-      for(var i=0;i<todos.length;i++){
-        if (todos[i].done===true) {
-          console.log('ada yang done')
-          done++
+        let done = 0
+        for(var i=0;i<result.length;i++) {
+          if (result[i].done==true) {
+            done++
+          }
         }
-      }
-      context.commit('setDone',done)
+        context.commit('setTodos',result)
+        context.commit('setDone',done)
+      })
     },
     openModal (context) {
     console.log('add Todo')

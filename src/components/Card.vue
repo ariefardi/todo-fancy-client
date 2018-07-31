@@ -123,23 +123,26 @@
 
 import moment from 'moment'
 import { mapState, mapActions } from 'vuex';
-  export default {
-    data: () => ({
-      messages: {
-          color: 'success',
-          icon: 'assignment',
-      },
-      lorem: 'Lorem ipsum Lorem Ipsum Lorem Ipsum',
-      popoutexpan: '',
-      todo: {
-        name: 'Makan Pagi',
-        date: moment().format('LT')
-      }
-      }),
-      computed: {
-    ...mapState([
-      'todos','doneTodo'
-    ])
+export default {
+  data: () => ({
+    messages: {
+        color: 'success',
+        icon: 'assignment',
+    },
+    lorem: 'Lorem ipsum Lorem Ipsum Lorem Ipsum',
+    popoutexpan: '',
+    todo: {
+      name: 'Makan Pagi',
+      date: moment().format('LT')
+    }
+    }),
+  computed: {
+  ...mapState([
+    'todos','doneTodo'
+  ]),
+  totalDone () {
+    return this.$store.state.doneTodo
+  }
   },
   methods: {
     ...mapActions([

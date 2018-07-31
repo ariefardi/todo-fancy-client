@@ -45,9 +45,6 @@ export default {
     this.$store.dispatch('getTodos')
     this.$store.dispatch('getWeather')
 
-  },
-  mounted () {
-    this.$store.dispatch('getDoneTodo')
   }
 }
 </script>
