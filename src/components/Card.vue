@@ -143,7 +143,7 @@ import { mapState, mapActions } from 'vuex';
   },
   methods: {
     ...mapActions([
-      'getTodos','openModal','deleteTodo','addDone'
+      'getTodos','openModal','deleteTodo','addDone', 'getDoneTodo'
     ])
   },
   created () {

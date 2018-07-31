@@ -77,7 +77,8 @@ export default new Vuex.Store({
     getDoneTodo (context) {
       // console.log('getDone')
       let todos = this.state.todos
-      // console.log(this.state.todos)
+      console.log(this.state.todos, ' ini kebaca gak')
+      console.log('test')
       let done = 0
       for(var i=0;i<todos.length;i++){
         if (todos[i].done===true) {
@@ -152,7 +153,7 @@ export default new Vuex.Store({
           }
         }
         context.commit('setWeather', weather)
-        console.log(weather)
+        // console.log(weather)
       })
     }
   }
