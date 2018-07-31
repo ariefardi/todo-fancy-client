@@ -48,7 +48,13 @@ export default new Vuex.Store({
       state.todos.push(payload)
     },
     deleteTodo (state, payload) {
-      state.todos.splice(payload,1)
+      if (state.todos[payload].done==true) {
+        state.doneTodo-=1
+        state.todos.splice(payload,1)
+      }
+      else {
+        state.todos.splice(payload,1)
+      }
     },
     setDone (state, payload) {
       state.doneTodo = payload
